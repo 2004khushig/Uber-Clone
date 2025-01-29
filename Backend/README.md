@@ -75,3 +75,78 @@ Example:
 ### Status Codes
 - **201**: User successfully registered.
 - **400**: Invalid input data.
+
+## POST /users/login
+
+### Description
+This endpoint is used to log in an existing user.
+
+### Request Body
+The request body must be a JSON object containing the following fields:
+
+- `email` (string, required): The email address of the user. Must be a valid email address.
+- `password` (string, required): The password for the user. Must be at least 6 characters long.
+
+Example:
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Responses
+
+- **200 OK**
+  - **Description**: User successfully logged in.
+  - **Body**: A JSON object containing the authentication token and user details.
+  - **Example**:
+    ```json
+    {
+      "token": "your_jwt_token",
+      "user": {
+        "_id": "user_id",
+        "fullname": {
+          "firstname": "John",
+          "lastname": "Doe"
+        },
+        "email": "john.doe@example.com"
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - **Description**: Invalid input data.
+  - **Body**: A JSON object containing the validation errors.
+  - **Example**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid Email",
+          "param": "email",
+          "location": "body"
+        },
+        {
+          "msg": "Password",
+          "param": "password",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid email or password.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+### Status Codes
+- **200**: User successfully logged in.
+- **400**: Invalid input data.
+- **401**: Invalid email or password.
