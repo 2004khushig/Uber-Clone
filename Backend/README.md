@@ -150,3 +150,59 @@ Example:
 - **200**: User successfully logged in.
 - **400**: Invalid input data.
 - **401**: Invalid email or password.
+
+## GET /users/profile
+
+### Description
+This endpoint is used to get the profile of the logged-in user.
+
+### Responses
+
+- **200 OK**
+  - **Description**: User profile retrieved successfully.
+  - **Body**: A JSON object containing the user details.
+  - **Example**:
+    ```json
+    {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com"
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: User is not authenticated.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Authentication required"
+    }
+    ```
+
+### Status Codes
+- **200**: User profile retrieved successfully.
+- **401**: User is not authenticated.
+
+## GET /users/logout
+
+### Description
+This endpoint is used to log out the logged-in user.
+
+### Responses
+
+- **200 OK**
+  - **Description**: User successfully logged out.
+  - **Body**: A JSON object containing a success message.
+  - **Example**:
+    ```json
+    {
+      "message": "Logged out"
+    }
+    ```
+
+### Status Codes
+- **200**: User successfully logged out.
