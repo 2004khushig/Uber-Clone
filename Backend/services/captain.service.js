@@ -7,15 +7,13 @@ module.exports.registerCaptain = async ({
         throw new Error('All fields are required');
     }
 
-    const hashedPassword = await captainModel.hashPassword(password); // Hash the password here
-
     const captain = new captainModel({
         fullname: {
             firstname,
-            lastname // this will be an empty string if no last name is provided
+            lastname 
         },
         email,
-        password: hashedPassword, // Use the hashed password here
+        password, 
         vehicle: {
             color,
             plate,
@@ -24,7 +22,6 @@ module.exports.registerCaptain = async ({
         }
     });
 
-    await captain.save(); // Save the captain to the database
-
-    return captain; // Return the captain object
-};
+    await captain.save();
+    return captain;
+}; 

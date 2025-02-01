@@ -319,3 +319,148 @@ Example:
 ### Status Codes
 - **201**: Captain successfully registered.
 - **400**: Invalid input data.
+
+## POST /captains/login
+
+### Description
+This endpoint is used to log in an existing captain.
+
+### Request Body
+The request body must be a JSON object containing the following fields:
+
+- `email` (string, required): The email address of the captain. Must be a valid email address.
+- `password` (string, required): The password for the captain. Must be at least 6 characters long.
+
+Example:
+```json
+{
+  "email": "jane.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Responses
+
+- **200 OK**
+  - **Description**: Captain successfully logged in.
+  - **Body**: A JSON object containing the authentication token and captain details.
+  - **Example**:
+    ```json
+    {
+      "token": "your_jwt_token",
+      "captain": {
+        "_id": "captain_id",
+        "fullname": {
+          "firstname": "Jane",
+          "lastname": "Doe"
+        },
+        "email": "jane.doe@example.com",
+        "vehicle": {
+          "color": "Red",
+          "plate": "ABC123",
+          "capacity": 4,
+          "vehicleType": "Car"
+        }
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - **Description**: Invalid input data.
+  - **Body**: A JSON object containing the validation errors.
+  - **Example**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid Email",
+          "param": "email",
+          "location": "body"
+        },
+        {
+          "msg": "Password",
+          "param": "password",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Invalid email or password.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+### Status Codes
+- **200**: Captain successfully logged in.
+- **400**: Invalid input data.
+- **401**: Invalid email or password.
+
+## GET /captains/profile
+
+### Description
+This endpoint is used to get the profile of the logged-in captain.
+
+### Responses
+
+- **200 OK**
+  - **Description**: Captain profile retrieved successfully.
+  - **Body**: A JSON object containing the captain details.
+  - **Example**:
+    ```json
+    {
+      "captain": {
+        "_id": "captain_id",
+        "fullname": {
+          "firstname": "Jane",
+          "lastname": "Doe"
+        },
+        "email": "jane.doe@example.com",
+        "vehicle": {
+          "color": "Red",
+          "plate": "ABC123",
+          "capacity": 4,
+          "vehicleType": "Car"
+        }
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: Captain is not authenticated.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Authentication required"
+    }
+    ```
+
+### Status Codes
+- **200**: Captain profile retrieved successfully.
+- **401**: Captain is not authenticated.
+
+## GET /captains/logout
+
+### Description
+This endpoint is used to log out the logged-in captain.
+
+### Responses
+
+- **200 OK**
+  - **Description**: Captain successfully logged out.
+  - **Body**: A JSON object containing a success message.
+  - **Example**:
+    ```json
+    {
+      "message": "Logged out successfully"
+    }
+    ```
+
+### Status Codes
+- **200**: Captain successfully logged out.
