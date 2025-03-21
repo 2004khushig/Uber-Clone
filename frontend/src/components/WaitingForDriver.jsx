@@ -10,9 +10,10 @@ const WaitingForDriver = (props) => {
             <div className="flex items-center justify-between">
                 <img className="h-14" src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
                 <div className="text-right">
-                    <h2 className="text-lg font-medium">Sameksh</h2>
-                    <h4 className="text-xl font-semibold -mt-1 -mb-1">KA 34RT 2104</h4>
+                    <h2 className="text-lg font-medium">{props.ride?.captain.fullname.firstname}</h2>
+                    <h4 className="text-xl font-semibold -mt-1 -mb-1">{props.ride?.captain.plate}</h4>
                     <p className="text-sm text-gray-600">White Suzuki S-Presso LXI</p>
+                    <h1 className="text-lg font-semibold">{props.ride?.otp}</h1>
                 </div>
             </div>
 
@@ -22,15 +23,15 @@ const WaitingForDriver = (props) => {
                     <div className="flex items-center mb-5 border-b-2">
                         <i className="text-2xl ri-map-pin-line"></i>
                         <div className="pl-5">
-                            <h3 className="font-semibold text-2xl">562/11-A</h3>
-                            <p className="text-gray-800 text-base mb-3">Kaikondrahalli, Bengaluru, Karnataka</p>
+                            <h3 className="font-semibold text-2xl">Pickup</h3>
+                            <p className="text-gray-800 text-base mb-3">{props.ride?.pickup}</p>
                         </div>
                     </div>
                     <div className="flex items-center mb-5 border-b-2">
                         <i className="text-2xl ri-map-pin-add-line"></i>
                         <div className="pl-5">
-                            <h3 className="font-semibold text-2xl">Kempegowda  Airport</h3>
-                            <p className="text-gray-800 text-base mb-3">Devanahalli, Bengaluru, Karnataka</p>
+                            <h3 className="font-semibold text-2xl">Destination</h3>
+                            <p className="text-gray-800 text-base mb-3">{props.ride?.destination}</p>
                         </div>
 
 
@@ -38,7 +39,7 @@ const WaitingForDriver = (props) => {
                     <div className="flex items-center ">
                         <i className="text-2xl ri-wallet-2-line"></i>
                         <div className="pl-5">
-                            <h3 className="font-semibold text-2xl">₹193.20</h3>
+                            <h3 className="font-semibold text-2xl">₹{props.ride?.fare}</h3>
                             <p className="text-gray-800 text-base">Cash</p>
                         </div>
                     </div>

@@ -1,6 +1,10 @@
 import React from "react";
 
 const LookingForDriver = (props) => {
+    const fareAmount =
+        props.fare?.[props.vehicleType] && typeof props.fare[props.vehicleType] === 'object'
+            ? props.fare[props.vehicleType][props.vehicleType]
+            : props.fare?.[props.vehicleType];
     return (
         <div>
         <h5 className="pd-5 pt-3 text-center w-[94%] absolute top-0 " onClick={() => {
@@ -13,15 +17,15 @@ const LookingForDriver = (props) => {
                 <div className="flex items-center mb-5 border-b-2">
                     <i className="text-2xl ri-map-pin-line"></i>
                     <div className="pl-5">
-                        <h3 className="font-semibold text-2xl">562/11-A</h3>
-                        <p className="text-gray-800 text-base mb-3">Kaikondrahalli, Bengaluru, Karnataka</p>
+                        <h3 className="font-semibold text-2xl">Pickup</h3>
+                        <p className="text-gray-800 text-base mb-3">{props.pickup}</p>
                     </div>
                 </div>
                 <div className="flex items-center mb-5 border-b-2">
                 <i className="text-2xl ri-map-pin-add-line"></i>
                     <div className="pl-5">
-                        <h3 className="font-semibold text-2xl">Kempegowda  Airport</h3>
-                        <p className="text-gray-800 text-base mb-3">Devanahalli, Bengaluru, Karnataka</p>
+                        <h3 className="font-semibold text-2xl">Destination</h3>
+                        <p className="text-gray-800 text-base mb-3">{props.destination}</p>
                     </div>
 
 
@@ -29,7 +33,7 @@ const LookingForDriver = (props) => {
                 <div className="flex items-center ">
                 <i className="text-2xl ri-wallet-2-line"></i>
                     <div className="pl-5">
-                        <h3 className="font-semibold text-2xl">₹193.20</h3>
+                        <h3 className="font-semibold text-2xl">₹{typeof fareAmount === "number" ? fareAmount.toFixed(2) : "N/A"}</h3>
                         <p className="text-gray-800 text-base">Cash</p>
                     </div>
                 </div>

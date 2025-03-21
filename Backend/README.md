@@ -464,3 +464,74 @@ This endpoint is used to log out the logged-in captain.
 
 ### Status Codes
 - **200**: Captain successfully logged out.
+
+
+## GET /rides/get-fare
+
+### Description
+This endpoint is used to get the fare for a ride based on the pickup and destination locations.
+
+### Query Parameters
+The request must include the following query parameters:
+
+- `pickup` (string, required): The pickup location. Must be at least 3 characters long.
+- `destination` (string, required): The destination location. Must be at least 3 characters long.
+
+Example:
+```
+GET /rides/get-fare?pickup=562/11-A&destination=Kempegowda%20Airport
+```
+
+### Responses
+
+- **200 OK**
+  - **Description**: Fare successfully calculated.
+  - **Body**: A JSON object containing the fare.
+  - **Example**:
+    ```json
+    {
+      "fare": 193.20
+    }
+    ```
+
+- **400 Bad Request**
+  - **Description**: Invalid input data.
+  - **Body**: A JSON object containing the validation errors.
+  - **Example**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid pickup address",
+          "param": "pickup",
+          "location": "query"
+        },
+        {
+          "msg": "Invalid destination",
+          "param": "destination",
+          "location": "query"
+        }
+      ]
+    }
+    ```
+
+- **401 Unauthorized**
+  - **Description**: User is not authenticated.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Authentication required"
+    }
+    ```
+
+- **500 Internal Server Error**
+  - **Description**: An error occurred while calculating the fare.
+  - **Body**: A JSON object containing an error message.
+  - **Example**:
+    ```json
+    {
+      "message": "Internal server error"
+    }
+    ```
+

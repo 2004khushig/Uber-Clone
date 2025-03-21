@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react'
 
-const LocationSearchPanel = (props) => {
-    const locations=[
-        "Kempegowda International Airport, KIAL Rd, Devanahalli, Bengaluru, Karnataka",
-        "Nexus Koramangala,No.21, Hosur Main Road, Koramangala, Bangalorem Karnataka",
-        "Cubbon Park,Kasturba Road, Ambedkar Veedhi, Bengaluru, Karnataka",
-        "Bengaluru City Junction Railway Station, Majestic, Bengaluru, Karnataka"
-    ]
+const LocationSearchPanel = ({ suggestions, setVehiclePanel, setPanelOpen, setPickup, setDestination, setPickupSuggestio, setDestinationSuggestions,activeField }) => {
+
+    const handleSuggestionClick = (suggestion) => {
+        if (activeField === 'pickup') {
+            setPickup(suggestion);
+            setPickupSuggestions([]);  
+        } else if (activeField === 'destination') {
+            setDestination(suggestion);
+            setDestinationSuggestions([]);  
+        }
+        
+    };
+    
+
     return (
         <div>
+            {/* Display fetched suggestions */}
             {
-                locations.map(function(elem,idx){
-                    return <div  key={idx} onClick={()=>{
-                        props.setVehiclePanelOpen(true)
-                        props.setPanelOpen(false)
-                    }
-                        
-                    }className='flex border-2 p-2 rounded-lg border-white active:border-black items-center mb-2'>
-                    <h2 className='bg-[#eeee] p-1 rounded-full'><i className="ri-map-pin-line text-xl"></i></h2>
-                    <h3 className='ml-2 font-semibold text-base'>{elem}</h3>
-                </div>
-                })
+                suggestions.map((elem, idx) => (
+                    <div
+                        key={idx}
+                        onClick={() => handleSuggestionClick(elem.description)}
+                        className='flex gap-4 border-2 p-3 border-gray-50 active:border-black rounded-xl items-center my-2 justify-start'
+                    >
+                        <h2 className='bg-[#eee] h-8 flex items-center justify-center w-12 rounded-full'>
+                            <i className="ri-map-pin-fill"></i>
+                        </h2>
+                        {/* Display location description properly */}
+                        <h4 className='font-medium'>{elem.description}</h4>
+                    </div>
+                ))
             }
-            
+
         </div>
     )
 }
-export default LocationSearchPanel;
+
+export default LocationSearchPanel

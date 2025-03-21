@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useContext} from "react";
+import {CaptainDataContext} from "../context/CaptainContext";
 
 const CaptainDetails = () => {
+    const {captain}=useContext(CaptainDataContext);
     return (
         <div>
             {/* Profile & Earnings */}
@@ -11,7 +13,7 @@ const CaptainDetails = () => {
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdlMd7stpWUCmjpfRjUsQ72xSWikidbgaI1w&s"
                             alt="Profile"
                         />
-                        <h4 className="text-lg font-medium">Harshita Patel</h4>
+                        <h4 className="text-lg font-medium capitalize">{captain.fullname.firstname+" "+captain.fullname.lastname}</h4>
                     </div>
                     <div>
                         <h4 className="text-xl font-semibold">₹604.27</h4>

@@ -61,7 +61,7 @@ const UserLogin = () => {
             placeholder="password"
           />
           <button
-            type="submit" // ✅ Ensure button is submit type
+            type="submit" 
             className="flex items-center justify-center font-bold w-full bg-black text-white py-3 rounded mb-5 mt-5"
           >
             Login
